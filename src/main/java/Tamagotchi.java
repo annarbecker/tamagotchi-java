@@ -31,10 +31,51 @@ public class Tamagotchi {
   }
 
   public int timePasses() {
-    return mFood--;
+    if (mSleep <= 5 || mPlay <= 5) {
+      return mFood -= 2;
+    } else {
+      return mFood--;
+    }
   }
 
   public boolean isAlive() {
     return mFood > 1;
+  }
+
+  public void setFoodLevel(int food) {
+    mFood = food;
+    if (mFood > 10) {
+      mFood = MAX_FOOD;
+    }
+  }
+
+  public void setSleepLevel(int sleep) {
+    mSleep = sleep;
+    if (mSleep > 10) {
+      mSleep = MAX_SLEEP;
+    }
+  }
+
+  public void setPlayLevel(int play) {
+    mPlay = play;
+    if (mPlay > 10) {
+      mPlay = MAX_PLAY;
+    }
+  }
+
+  public void randomEvent(){
+    switch ((int) (Math.random()*6)){
+      case 6: mSleep -= 2;
+      case 5: mPlay -= 2;
+      case 4: mFood -= 2;
+      case 3: mPlay++;
+      case 2: mFood++;
+      case 1: mSleep++;
+      default: break;
+    }
+  }
+
+  public void addFood() {
+    mFood++;
   }
 }
